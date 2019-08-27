@@ -15,28 +15,18 @@ You will also see any lint errors in the console.
 ## Requirements:
 
 # General requirements
-- User should at all times know that something is being loaded (e.g. spinner/fake content)
-Application should be responsive and work both on desktop and mobile devices
-Use this API: https://punkapi.com/documentation/v2
+Using SWAPI: https://swapi.co/documentation
 
-- Your app should look more or less like this: https://drive.google.com/file/d/0B3Gr69JeT5_jbnhoWmZjRF94VzA (bear in mind it’s more like a mockup and should not be treated as a final design)
+Build an application to select random people or starships and render their details to see
+who would win based on a common attribute.
+i.e. people have mass and starships have crew. A person with greater mass wins, a
+starship with more crew wins.
+The app should render the attributes from the resource in a simple web page that allows
+you to 'play' the game.
+Once two cards are displayed the app should declare one of the cards a winner based on
+the higher common attribute.
+Having displayed the winning card, the user should be able to play again using an action
+button that repeats the same request.
 
-- We should be able to run your app using only two commands: npm install && npm start
-Once you’re ready to show us your work, pack everything to dropbox or drive and send the link over by email (please do not upload your solution to GitHub or any other publicly available platform)
-
-- Listing view
-User should see 20 beers on the first page
-Each beer on the list should display: name, image, tagline
-On bigger devices items should appear in a grid and on smaller resolutions they should wrap in a column
-
-- User should be able to see more beers as she/he scrolls down (infinite scroll)
-
-- If there are no more items to load user should see that’s the end of the list and no more requests should be triggered
-
-# Details view
-
-Details view should be a modal accessible by clicking on any item on the listing view or by manually entering the page using it’s URL address (e.g. /details/:id)
-The modal should contain the following informations: name, tagline, description, image, brewer_tips, ibu, abv
-Additionally modal should also list up to 3 similar beers (use available API to get beers with similar IBU/ABV/EBC)
 
 
