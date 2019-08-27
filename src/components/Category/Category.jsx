@@ -20,9 +20,12 @@ class Category extends Component {
         <CategoryWrapper>
           <CategoryItem
             img={"/static/images/mill.png"}
-            onClick={() => this.setCategory('people')}
+            onClick={() => this.setCategory("starship")}
           />
-          <CategoryItem img={"/static/images/luke.png"} />
+          <CategoryItem
+            img={"/static/images/luke.png"}
+            onClick={() => this.setCategory("people")}
+          />
         </CategoryWrapper>
       </Fragment>
     );

@@ -10,10 +10,6 @@ class App extends Component {
     cards: []
   };
 
-  componentDidMount() {
-    this.fetchCards();
-  }
-
   fetchCards = async category => {
     const counter = category === "people" ? 87 : 37;
     const randomNum = Math.floor(Math.random() * counter);
@@ -27,12 +23,13 @@ class App extends Component {
     } else {
       console.log(response);
       this.setState(state => ({
-        cards: [...state.cards, ...response.data]
+        cards: [...state.cards, response.data]
       }));
     }
   };
 
   render() {
+    console.log(this.state.cards)
     return (
       <Wrapper>
         <Category fetchCards={this.fetchCards} />
