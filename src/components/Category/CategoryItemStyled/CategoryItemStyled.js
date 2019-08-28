@@ -11,7 +11,9 @@ export const CategoryItem = styled.div`
   width: 50%;
   opacity: 0.3;
   cursor: pointer;
+  transition: transform 1s ease-in-out;
   &:hover {
     opacity: 1;
+    transform: scale(1.03);
   }
 `;
