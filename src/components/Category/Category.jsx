@@ -17,14 +17,23 @@ class Category extends Component {
     })
     this.props.fetchCards(category)
     this.props.fetchCards(category)
-    this.props.renderView('BattleGround')
+    this.renderView()
   };
+
+  async renderView() {
+    const fetched = await this.setCategory
+    
+    fetched && this.setState({
+      loading: false,
+    })
+    fetched && this.props.renderView('BattleGround')
+    
+  }
 
   render() {
     return (
       <Fragment>
         <Title>Choose Category</Title>
-        <Loading />
         {this.state.loading && <Loading />}
         <CategoryWrapper>
           <CategoryItem

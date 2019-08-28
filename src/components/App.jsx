@@ -14,7 +14,7 @@ class App extends Component {
 
   fetchCards = async category => {
     const counter = category === "people" ? 87 : 37;
-    const randomNum = Math.floor(Math.random() * counter);
+    const randomNum = Math.floor(Math.random() * counter) + 1;
     const link = `/${category}/${randomNum}`;
     const response = await swapi.get(`${link}`).catch(error => error);
 
@@ -45,7 +45,6 @@ class App extends Component {
           <BattleGround fetchCards={this.fetchCards} />
         </Wrapper>
       );
-      break;
     default:
       return (
         <Wrapper>
