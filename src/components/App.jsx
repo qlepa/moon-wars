@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import swapi from "../api/swapi";
 
 import Category from "./Category/Category";
+import BattleGround from './BattleGround/BattleGround';
 import { Wrapper } from "./Common/WrapperStyled/WrapperStyled";
 
 class App extends Component {
   state = {
     errorFetch: null,
+    view: 'Category',
     cards: []
   };
 
@@ -28,14 +30,30 @@ class App extends Component {
     }
   };
 
+  renderView = (view) => {
+    this.setState({
+      view: view,
+    })
+  };
+
   render() {
     console.log(this.state.cards)
-    return (
-      <Wrapper>
-        <Category fetchCards={this.fetchCards} />
-      </Wrapper>
-    );
+    switch (this.state.view) {
+    case 'BattleGround':
+      return (
+        <Wrapper>
+          <BattleGround fetchCards={this.fetchCards} />
+        </Wrapper>
+      );
+      break;
+    default:
+      return (
+        <Wrapper>
+          <Category fetchCards={this.fetchCards} renderView={this.renderView} />
+        </Wrapper>
+      );
   }
+}
 }
 
 export default App;

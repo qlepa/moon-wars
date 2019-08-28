@@ -17,6 +17,7 @@ class Category extends Component {
     })
     this.props.fetchCards(category)
     this.props.fetchCards(category)
+    this.props.renderView('BattleGround')
   };
 
   render() {
