@@ -11,26 +11,33 @@ class Category extends Component {
     loading: false,
   };
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.successFetch !== this.props.successFetch) {
+      this.renderView();
+    }
+  }
+
   setCategory(category) {
     this.setState({
       loading: true
     })
     this.props.fetchCards(category)
     this.props.fetchCards(category)
-    this.renderView()
   };
 
-  async renderView() {
-    const fetched = await this.setCategory
+  //TODO In renderView i need to render BattleGround or Error depend succesFetch. && w8 for data from both function. One Error === error
+  renderView() {
+    const { successFetch } = this.props
     
-    fetched && this.setState({
+    successFetch && this.setState({
       loading: false,
     })
-    fetched && this.props.renderView('BattleGround')
+    successFetch && this.props.renderView('BattleGround')
     
   }
 
   render() {
+    console.log(this.props.successFetch)
     return (
       <Fragment>
         <Title>Choose Category</Title>

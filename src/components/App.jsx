@@ -8,6 +8,7 @@ import { Wrapper } from "./Common/WrapperStyled/WrapperStyled";
 class App extends Component {
   state = {
     errorFetch: null,
+    successFetch: false,
     view: 'Category',
     cards: []
   };
@@ -23,9 +24,9 @@ class App extends Component {
         errorFetch: response.message
       });
     } else {
-      console.log(response);
       this.setState(state => ({
-        cards: [...state.cards, response.data]
+        cards: [...state.cards, response.data],
+        successFetch: true,
       }));
     }
   };
@@ -42,13 +43,13 @@ class App extends Component {
     case 'BattleGround':
       return (
         <Wrapper>
-          <BattleGround fetchCards={this.fetchCards} />
+          <BattleGround fetchCards={this.fetchCards} cards={this.state.cards} />
         </Wrapper>
       );
     default:
       return (
         <Wrapper>
-          <Category fetchCards={this.fetchCards} renderView={this.renderView} />
+          <Category fetchCards={this.fetchCards} renderView={this.renderView} successFetch={this.state.successFetch} />
         </Wrapper>
       );
   }
