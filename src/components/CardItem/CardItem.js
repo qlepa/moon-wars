@@ -13,7 +13,7 @@ const CardItem = memo(function CardItem(props) {
     return (
       <Card className={classes.card}>
         <CardContent className={classes.content}>
-          <Typography>Gracz {id} </Typography>
+          <Typography>Player {id} </Typography>
           <Typography className={classes.title}>
             {card.name}
           </Typography>

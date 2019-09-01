@@ -53,9 +53,9 @@ class BattleGround extends PureComponent {
     if (atributes[0] === 'unknown' || atributes[1] === 'unknown') {
       return <h2>Atribute unknown. Play again</h2>;
     } else if (atributes[0] > atributes[1]) {
-      return <h2>Player One Wins!</h2>;
+      return <h2>Player 1 Wins!</h2>;
     } else if (atributes[0] < atributes[1]) {
-      return <h2>Player Two Wins!</h2>;
+      return <h2>Player 2 Wins!</h2>;
     } else if (atributes[0] === 'unknown' || atributes[1] === 'unknown') {
       return <h2>Atribute unknown. Play again</h2>;
     } else {
@@ -64,14 +64,19 @@ class BattleGround extends PureComponent {
   };
 
   playAgain() {
-    //TODO show loading while fetching data
-    // this.setState({
-    //   loading: true
-    // });
+    this.setState({
+      loading: true
+    });
     this.props.clearCards();
     this.props.fetchCards(this.state.category);
-    this.props.fetchCards(this.state.category);
+    this.props.fetchCards(this.state.category).then(() => this.closeLoading()) ;
   };
+
+  closeLoading() {
+    this.setState({
+      loading: false
+    })
+  }
 
   render() {
     return (
