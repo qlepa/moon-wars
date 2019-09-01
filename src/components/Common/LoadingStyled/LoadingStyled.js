@@ -24,13 +24,14 @@ const move = keyframes`
 
 export const Loading = styled.div`
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 5%;
+  left: 25%;
   transform: translate(-50%, -50%);
   width: 600px;
   height: 600px;
   z-index: 9;
-  background-image: url("/static/images/yoda2.png");
+  background-image: url("/static/images/yoda1.png");
+  background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
