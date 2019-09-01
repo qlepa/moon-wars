@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import swapi from "../api/swapi";
 
 import Category from "./Category/Category";
-import BattleGround from './BattleGround/BattleGround';
+import BattleGround from "./BattleGround/BattleGround";
 import { Wrapper } from "./Common/WrapperStyled/WrapperStyled";
 
 class App extends Component {
@@ -10,15 +10,15 @@ class App extends Component {
     errorFetch: null,
     successFetch: false,
     view: "Category",
-    cards: [],
+    cards: []
   };
 
-  fetchCategoryCounter = (category) => {
+  fetchCategoryCounter = category => {
     return swapi
       .get(`/${category}`)
       .then(response => response.data.count)
       .catch(error => error);
-  }
+  };
 
   //const itemsPerPage = 10
   //const howManyPages = counter/itemsPerPage
@@ -36,19 +36,39 @@ class App extends Component {
 
   fetchCards = async category => {
     const counter = await this.fetchCategoryCounter(category);
-    const randomNum = Math.floor(Math.random() * counter) + 1;
-    const link = `/${category}/${randomNum}`;
-    const response = await swapi.get(`${link}`).catch(error => error);
+    const itemsPerPage = 10;
+    const rest = counter % 10;
+    //TODO Zaokrągla się nieprawidłowo. Czasem 10 strona wpada
+    const howManyPages = rest
+      ? counter / itemsPerPage.toFixed(0) + 1
+      : counter / itemsPerPage.toFixed(0);
+    const page = Math.floor(Math.random() * howManyPages) + 1;
+    // const link = `/${category}/?page=${page}`;
+    const link = `/${category}/?page=${3}`;
 
+    const itemIndex = page === howManyPages ? rest : itemsPerPage;
+    //Źle liczy index, czasami wpada 10
+    const randomItem = Math.floor(Math.random() * itemIndex);
+    const response = await swapi.get(`${link}`).catch(error => error);
+    console.log({ counter });
+    console.log({ rest });
+    console.log({ howManyPages });
+    console.log({ page });
+    console.log({ link });
+    console.log({ itemIndex });
+    console.log({ randomItem });
+    console.log({ response });
     if (response.message) {
       this.setState({
         errorFetch: response.message
       });
     } else {
       //TODO clear array when runs again
-      console.log({counter})
+      // console.log({ counter });
       this.setState(state => ({
-        cards: [...state.cards, response.data]
+        cards: [...state.cards, response.data.results[randomItem]]
+        // cards: [...state.cards, response.data.results[3]],
+
         // successFetch: true,
       }));
       if (this.state.cards.length === 2) {
@@ -65,6 +85,12 @@ class App extends Component {
     });
   };
 
+  clearCards = () => {
+    this.setState({
+      cards: []
+    })
+  }
+
   render() {
     // console.log(this.state.cards);
     switch (this.state.view) {
@@ -74,6 +100,7 @@ class App extends Component {
             <BattleGround
               fetchCards={this.fetchCards}
               cards={this.state.cards}
+              clearCards={this.clearCards}
             />
           </Wrapper>
         );

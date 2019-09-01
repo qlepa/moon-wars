@@ -1,25 +1,58 @@
-import React, { memo } from "react";
+import React, { memo, Fragment, Component } from "react";
 
 import { Card } from "@material-ui/core";
 import { CardContent } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 
-export const CardItem = memo(function CardItem(props) {
-  const classes = useStyles();
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/styles";
 
-  return (
-      console.log(this.props.cards)
-    // <Card className={classes.card}>
-    //   <CardContent>
-    //     <Typography>{/* {this.props.card.name} */}</Typography>
-    //   </CardContent>
-    // </Card>
-  );
-});
+class CardItem extends Component {
+  render() {
+    const { classes, card } = this.props;
+    // console.log(this.props.card)
+    return (
+      <Card className={classes.card}>
+        <CardContent className={classes.content}>
+          <Typography className={classes.title}>
+            {card.name}
+          </Typography>
+          <Typography className={classes.atribute}>
+            {card.mass}
+            {card.crew}
+          </Typography>
+        </CardContent>
+      </Card>
+    );
+  }
+}
 
-const useStyles = makeStyles({
+const styles = theme => ({
   card: {
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#ffffff",
+    color: "#000000",
+    textAlign: "center",
+    width: "40%"
+  },
+  content: {
     backgroundColor: "#ffffff"
+  },
+  title: {
+    backgroundColor: "#ffffff",
+    color: "#000000"
+  },
+  atribute: {
+    backgroundColor: "#ffffff",
+    color: "#000000",
+    fontSize: "3em",
+    marginTop: "20px"
   }
 });
+
+CardItem.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(CardItem);
