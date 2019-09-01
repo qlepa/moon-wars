@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 
 import { CategoryWrapper } from "./CategoryWrapperStyled/CategoryWrapperStyled";
 import { Title } from "../Common/TitleStyled/TitleStyled";
+import { Header } from "../Common/HeaderStyled/HeaderStyled";
 import { CategoryItem } from "./CategoryItemStyled/CategoryItemStyled";
 import { Loading } from "../Common/LoadingStyled/LoadingStyled";
 
@@ -38,7 +39,9 @@ class Category extends Component {
   render() {
     return (
       <Fragment>
-        <Title>Choose Category</Title>
+        <Header>
+          <Title>Choose Category</Title>
+        </Header>
         {this.state.loading && <Loading />}
         <CategoryWrapper>
           <CategoryItem

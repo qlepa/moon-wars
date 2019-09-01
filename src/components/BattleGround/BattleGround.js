@@ -3,6 +3,7 @@ import React, { PureComponent, Fragment } from "react";
 import { Title } from "../Common/TitleStyled/TitleStyled";
 import { BattleWrapper } from "./BattleWrapperStyled/BattleWrapperStyled";
 import { Table } from "./TableStyled/TableStyled";
+import { Header } from "../Common/HeaderStyled/HeaderStyled";
 import { Result } from "./ResultStyled/ResultStyled";
 import { Button } from "../Common/ButtonStyled/ButtonStyled";
 import { Loading } from "../Common/LoadingStyled/LoadingStyled";
@@ -13,7 +14,7 @@ class BattleGround extends PureComponent {
   state = {
     atributes: [],
     category: null,
-    loading: false
+    loading: false,
   };
 
   componentDidMount() {
@@ -81,13 +82,17 @@ class BattleGround extends PureComponent {
   render() {
     return (
       <Fragment>
-        <Title>Moon Wars</Title>
-        {this.props.errorFetch && (
-          <ErrorPage>{this.props.errorFetch}</ErrorPage>
-        )}
+        <Header>
+          <Title>Moon Wars</Title>
+          {this.props.errorFetch && (
+            <ErrorPage>{this.props.errorFetch}</ErrorPage>
+          )}
+        </Header>
         <BattleWrapper>
           <Table>{this.renderCard()}</Table>
-          <Result>{this.state.atributes.length === 2 && this.checkWhoWins()}</Result>
+          <Result>
+            {this.state.atributes.length === 2 && this.checkWhoWins()}
+          </Result>
           <Button onClick={() => this.playAgain()}>PLAY AGAIN</Button>
           <Button onClick={() => this.props.resetGame()}>Go Back</Button>
         </BattleWrapper>

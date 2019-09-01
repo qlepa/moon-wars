@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const BattleWrapper = styled.div`
+export const BattleWrapper = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
