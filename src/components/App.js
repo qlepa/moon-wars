@@ -33,8 +33,12 @@ class App extends Component {
     const itemsPerPage = 10;
     const rest = counter % 10;
     const howManyPages = rest
-      ? (counter / itemsPerPage).toFixed(0)
+      ? parseInt((counter / itemsPerPage).toFixed(0))
       : (counter / itemsPerPage).toFixed(0);
+    console.log({counter})
+    console.log({ itemsPerPage });
+    console.log({rest})
+    console.log({ howManyPages });
     const page = Math.floor(Math.random() * howManyPages) + 1;
     const link = `/${category}/?page=${page}`;
     const itemIndex = page === howManyPages ? rest - 1 : itemsPerPage;
@@ -95,6 +99,7 @@ class App extends Component {
               fetchCards={this.fetchCards}
               renderView={this.renderView}
               finishFetch={this.state.finishFetch}
+              errorFetch={this.state.errorFetch}
             />
           </Wrapper>
         );

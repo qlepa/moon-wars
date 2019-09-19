@@ -69,7 +69,9 @@ class BattleGround extends PureComponent {
       loading: true
     });
     this.props.clearCards();
-    Promise.all([this.props.fetchCards(this.state.category), this.props.fetchCards(this.setState.category)]).then(this.closeLoading());
+    this.props.fetchCards(this.state.category);
+    this.props.fetchCards(this.state.category).then(() => this.closeLoading());
+    // Promise.all([this.props.fetchCards(this.state.category), this.props.fetchCards(this.setState.category)]).then(this.closeLoading());
   };
 
   closeLoading() {
