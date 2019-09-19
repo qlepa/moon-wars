@@ -8,15 +8,19 @@ import { Wrapper } from "./Common/WrapperStyled/WrapperStyled";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      errorFetch: null,
-      finishFetch: false,
-      view: "Category",
-      cards: []
-    };
+    this.state = this.getInitialState()
     this.baseState = this.state;
   };
 
+  getInitialState() {
+    return {
+      errorFetch: null,
+      finishFetch: false,
+      view: "Category",
+      cards: [],
+    }
+  }
+    
   fetchCategoryCounter = category => {
     return swapi
       .get(`/${category}`)
@@ -29,7 +33,7 @@ class App extends Component {
     const itemsPerPage = 10;
     const rest = counter % 10;
     const howManyPages = rest
-      ? parseInt((counter / itemsPerPage).toFixed(0))
+      ? (counter / itemsPerPage).toFixed(0)
       : (counter / itemsPerPage).toFixed(0);
     const page = Math.floor(Math.random() * howManyPages) + 1;
     const link = `/${category}/?page=${page}`;
