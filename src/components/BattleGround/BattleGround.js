@@ -14,12 +14,12 @@ class BattleGround extends PureComponent {
   state = {
     atributes: [],
     category: null,
-    loading: false,
+    loading: false
   };
 
   componentDidMount() {
     this.setAtributes();
-  };
+  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.cards !== this.props.cards) {
@@ -27,14 +27,14 @@ class BattleGround extends PureComponent {
         atributes: []
       });
       this.setAtributes();
-    };
-  };
+    }
+  }
 
   renderCard = () => {
     const { cards } = this.props;
 
     return cards.map((card, key) => {
-      return <CardItem card={card} key={key} id={key+1} />;
+      return <CardItem card={card} key={key} id={key + 1} />;
     });
   };
 
@@ -44,64 +44,62 @@ class BattleGround extends PureComponent {
       this.setState(state => ({
         atributes: [...state.atributes, atr.mass || atr.crew],
         category: atr.mass ? "people" : "starships"
-      }))
+      }));
     });
   };
 
   checkWhoWins = () => {
     const { atributes } = this.state;
-    console.log('siem')
 
-    if (atributes[0] === 'unknown' || atributes[1] === 'unknown') {
+    if (atributes[0] === "unknown" || atributes[1] === "unknown") {
       return <h2>Atribute unknown. Play again</h2>;
-    } else if (atributes[0] > atributes[1]) {
+    } else if (parseInt(atributes[0]) > parseInt(atributes[1])) {
       return <h2>Player 1 Wins!</h2>;
-    } else if (atributes[0] < atributes[1]) {
+    } else if (parseInt(atributes[0]) < parseInt(atributes[1])) {
       return <h2>Player 2 Wins!</h2>;
-    } else if (atributes[0] === 'unknown' || atributes[1] === 'unknown') {
-      return <h2>Atribute unknown. Play again</h2>;
     } else {
-      return <h2>Draw!</h2>
-    };
+      return <h2>Draw!</h2>;
+    }
   };
 
   playAgain() {
+    const { clearCards, fetchCards } = this.props;
+    const { category } = this.state;
+
     this.setState({
       loading: true
     });
-    this.props.clearCards();
-    this.props.fetchCards(this.state.category);
-    this.props.fetchCards(this.state.category).then(() => this.closeLoading());
-    // Promise.all([this.props.fetchCards(this.state.category), this.props.fetchCards(this.setState.category)]).then(this.closeLoading());
-  };
+    clearCards();
+    fetchCards(category);
+    fetchCards(category).then(() => this.closeLoading());
+  }
 
   closeLoading() {
     this.setState({
       loading: false
-    })
+    });
   }
 
   render() {
+    const { errorFetch, resetGame } = this.props;
+    const { atributes, loading } = this.state;
+
     return (
       <Fragment>
         <Header>
           <Title>Moon Wars</Title>
-          {this.props.errorFetch && (
-            <ErrorPage>{this.props.errorFetch}</ErrorPage>
-          )}
+          {errorFetch && <ErrorPage>{errorFetch}</ErrorPage>}
         </Header>
         <BattleWrapper>
           <Table>{this.renderCard()}</Table>
-          <Result>
-            {this.state.atributes.length === 2 && this.checkWhoWins()}
-          </Result>
+          <Result>{atributes.length === 2 && this.checkWhoWins()}</Result>
           <Button onClick={() => this.playAgain()}>PLAY AGAIN</Button>
-          <Button onClick={() => this.props.resetGame()}>Go Back</Button>
+          <Button onClick={() => resetGame()}>Go Back</Button>
         </BattleWrapper>
-        {this.state.loading && <Loading />}
+        {loading && <Loading />}
       </Fragment>
     );
-  };
-};
+  }
+}
 
 export default BattleGround;

@@ -8,19 +8,19 @@ import { Wrapper } from "./Common/WrapperStyled/WrapperStyled";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = this.getInitialState()
+    this.state = this.getInitialState();
     this.baseState = this.state;
-  };
+  }
 
   getInitialState() {
     return {
       errorFetch: null,
       finishFetch: false,
       view: "Category",
-      cards: [],
-    }
+      cards: []
+    };
   }
-    
+
   fetchCategoryCounter = category => {
     return swapi
       .get(`/${category}`)
@@ -35,10 +35,6 @@ class App extends Component {
     const howManyPages = rest
       ? parseInt((counter / itemsPerPage).toFixed(0))
       : (counter / itemsPerPage).toFixed(0);
-    console.log({counter})
-    console.log({ itemsPerPage });
-    console.log({rest})
-    console.log({ howManyPages });
     const page = Math.floor(Math.random() * howManyPages) + 1;
     const link = `/${category}/?page=${page}`;
     const itemIndex = page === howManyPages ? rest - 1 : itemsPerPage;
@@ -79,16 +75,18 @@ class App extends Component {
   };
 
   render() {
-    switch (this.state.view) {
+    const { view, cards, errorFetch, finishFetch } = this.state;
+
+    switch (view) {
       case "BattleGround":
         return (
           <Wrapper>
             <BattleGround
               fetchCards={this.fetchCards}
-              cards={this.state.cards}
+              cards={cards}
               clearCards={this.clearCards}
               resetGame={this.resetGame}
-              errorFetch={this.state.errorFetch}
+              errorFetch={errorFetch}
             />
           </Wrapper>
         );
@@ -98,13 +96,13 @@ class App extends Component {
             <Category
               fetchCards={this.fetchCards}
               renderView={this.renderView}
-              finishFetch={this.state.finishFetch}
+              finishFetch={finishFetch}
               errorFetch={this.state.errorFetch}
             />
           </Wrapper>
         );
-    };
-  };
-};
+    }
+  }
+}
 
 export default App;
