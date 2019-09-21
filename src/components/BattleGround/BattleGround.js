@@ -50,6 +50,7 @@ class BattleGround extends PureComponent {
 
   checkWhoWins = () => {
     const { atributes } = this.state;
+    console.log('siem')
 
     if (atributes[0] === 'unknown' || atributes[1] === 'unknown') {
       return <h2>Atribute unknown. Play again</h2>;
