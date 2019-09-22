@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `ShallowWrapper {}`;
 
-exports[`renders correctly again 1`] = `
+exports[`renders correctly detailed 1`] = `
 initialize {
   "0": Object {
     "attribs": Object {

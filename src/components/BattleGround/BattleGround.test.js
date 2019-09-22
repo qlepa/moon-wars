@@ -14,7 +14,7 @@ it("renders correctly", () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it("renders correctly again", () => {
+it("renders correctly detailed", () => {
   const wrapper = render(
     <BattleGround
       cards={[{ name: "Luke", mass: 10 }]}
@@ -27,3 +27,5 @@ it("renders correctly again", () => {
 
   expect(wrapper).toMatchSnapshot();
 });
+
+

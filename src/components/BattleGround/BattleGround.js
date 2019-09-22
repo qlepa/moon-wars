@@ -40,8 +40,8 @@ class BattleGround extends PureComponent {
 
   setAtributes = () => {
     const { cards } = this.props;
-    
-    cards.map(atr => {
+
+    cards.forEach(atr => {
       this.setState(state => ({
         atributes: [...state.atributes, atr.mass || atr.crew],
         category: atr.mass ? "people" : "starships"
