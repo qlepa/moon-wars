@@ -9,32 +9,34 @@ import { Loading } from "../Common/LoadingStyled/LoadingStyled";
 class Category extends Component {
   state = {
     category: null,
-    loading: false,
+    loading: false
   };
 
   componentDidUpdate(prevProps) {
     if (prevProps.finishFetch !== this.props.finishFetch) {
       this.renderView();
-    };
-  };
+    }
+  }
 
   setCategory(category) {
+    const { fetchCards } = this.props;
+
     this.setState({
       loading: true
-    })
-    this.props.fetchCards(category)
-    this.props.fetchCards(category)
-  };
+    });
+    fetchCards(category);
+    fetchCards(category);
+  }
 
   renderView() {
-    const { finishFetch } = this.props
-    
-    finishFetch && this.setState({
-      loading: false,
-    })
-    finishFetch && this.props.renderView('BattleGround')
-    
-  };
+    const { finishFetch, renderView } = this.props;
+
+    finishFetch &&
+      this.setState({
+        loading: false
+      });
+    finishFetch && renderView("BattleGround");
+  }
 
   render() {
     return (
@@ -55,7 +57,7 @@ class Category extends Component {
         </CategoryWrapper>
       </Fragment>
     );
-  };
-};
+  }
+}
 
 export default Category;
