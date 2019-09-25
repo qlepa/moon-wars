@@ -37,5 +37,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jest-styled-components": "^6.3.3"
+  }
 }

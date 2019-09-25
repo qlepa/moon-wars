@@ -11,4 +11,3 @@ it("renders correctly", () => {
 
   expect(wrapper).toMatchSnapshot();
 });
-
