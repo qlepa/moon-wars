@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import swapi from "../api/swapi";
-
+import swapi from "../Services/api/swapi";
 import Category from "./Category/Category";
 import BattleGround from "./BattleGround/BattleGround";
 import { Wrapper } from "./Common/WrapperStyled/WrapperStyled";
+import fetchCategoryCounter from '../Services/fetchCategoryCounter'
 
 class App extends Component {
   constructor(props) {
@@ -20,16 +20,9 @@ class App extends Component {
       cards: []
     };
   }
-
-  fetchCategoryCounter = category => {
-    return swapi
-      .get(`/${category}`)
-      .then(response => response.data.count)
-      .catch(error => error);
-  };
-
+  
   fetchCards = async category => {
-    const counter = await this.fetchCategoryCounter(category);
+    const counter = await fetchCategoryCounter(category);
     const itemsPerPage = 10;
     const rest = counter % 10;
     const howManyPages = rest
