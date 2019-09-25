@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `ShallowWrapper {}`;
+exports[`Renders check renders correctly 1`] = `ShallowWrapper {}`;
 
-exports[`renders correctly detailed 1`] = `
+exports[`Renders check renders correctly detailed 1`] = `
 initialize {
   "0": Object {
     "attribs": Object {
